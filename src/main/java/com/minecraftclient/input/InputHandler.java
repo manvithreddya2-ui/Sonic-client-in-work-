@@ -10,6 +10,8 @@ public class InputHandler {
     private double lastMouseX = 0;
     private double lastMouseY = 0;
     private boolean firstMouse = true;
+    private float moveSpeed = 30.0f;
+    private boolean sprinting = false;
     
     public InputHandler(long windowHandle, Camera camera) {
         this.windowHandle = windowHandle;
@@ -25,7 +27,6 @@ public class InputHandler {
             
             double xoffset = xpos - lastMouseX;
             double yoffset = lastMouseY - ypos;
-            
             lastMouseX = xpos;
             lastMouseY = ypos;
             
@@ -34,32 +35,29 @@ public class InputHandler {
     }
     
     public void update(double deltaTime) {
-        float moveSpeed = 30.0f * (float) deltaTime;
+        float speed = moveSpeed * (float) deltaTime;
         
-        Vector3f forward = new Vector3f(0, 0, -1);
-        Vector3f right = new Vector3f(1, 0, 0);
+        sprinting = GLFW.glfwGetKey(windowHandle, GLFW.GLFW_KEY_LEFT_SHIFT) == GLFW.GLFW_PRESS;
+        if (sprinting) speed *= 2.0f;
         
-        // Rotate vectors based on camera rotation
-        forward.rotateY((float) Math.toRadians(camera.getRotation().y));
-        right.rotateY((float) Math.toRadians(camera.getRotation().y));
+        Vector3f forward = camera.getForward();
+        Vector3f right = camera.getRight();
         
         if (GLFW.glfwGetKey(windowHandle, GLFW.GLFW_KEY_W) == GLFW.GLFW_PRESS) {
-            camera.move(forward, moveSpeed);
+            camera.move(forward, speed);
         }
         if (GLFW.glfwGetKey(windowHandle, GLFW.GLFW_KEY_S) == GLFW.GLFW_PRESS) {
-            camera.move(forward, -moveSpeed);
+            camera.move(forward, -speed);
         }
         if (GLFW.glfwGetKey(windowHandle, GLFW.GLFW_KEY_D) == GLFW.GLFW_PRESS) {
-            camera.move(right, moveSpeed);
+            camera.move(right, speed);
         }
         if (GLFW.glfwGetKey(windowHandle, GLFW.GLFW_KEY_A) == GLFW.GLFW_PRESS) {
-            camera.move(right, -moveSpeed);
+            camera.move(right, -speed);
         }
-        if (GLFW.glfwGetKey(windowHandle, GLFW.GLFW_KEY_SPACE) == GLFW.GLFW_PRESS) {
-            camera.move(new Vector3f(0, 1, 0), moveSpeed);
-        }
-        if (GLFW.glfwGetKey(windowHandle, GLFW.GLFW_KEY_LEFT_SHIFT) == GLFW.GLFW_PRESS) {
-            camera.move(new Vector3f(0, -1, 0), moveSpeed);
-        }
+    }
+    
+    public boolean isKeyPressed(int key) {
+        return GLFW.glfwGetKey(windowHandle, key) == GLFW.GLFW_PRESS;
     }
 }

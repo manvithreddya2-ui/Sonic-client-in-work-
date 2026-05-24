@@ -5,13 +5,13 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.minecraftclient</groupId>
-    <artifactId>minecraft-client</artifactId>
+    <groupId>com.soniclient</groupId>
+    <artifactId>sonic-client</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Minecraft Client</name>
-    <description>A lightweight Minecraft client implementation</description>
+    <name>Sonic Client</name>
+    <description>A fast Minecraft-style client with advanced features</description>
 
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
@@ -50,6 +50,13 @@
             <version>1.10.5</version>
         </dependency>
 
+        <!-- Noise Generation -->
+        <dependency>
+            <groupId>com.github.Rubentxu</groupId>
+            <artifactId>Processing-Noise</artifactId>
+            <version>0.1.0</version>
+        </dependency>
+
         <!-- Logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -62,6 +69,13 @@
             <version>1.4.5</version>
         </dependency>
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
 
     <build>
         <plugins>
@@ -89,6 +103,18 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.minecraftclient.Client</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>

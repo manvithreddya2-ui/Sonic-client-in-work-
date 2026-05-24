@@ -1,18 +1,24 @@
-# Minecraft Client
+# Sonic Client
 
-A lightweight Minecraft client implementation built with Java and LWJGL.
+⚡ A fast, feature-rich Minecraft-style client built with Java and LWJGL.
 
 ## Features
-- 3D world rendering
-- Player movement and camera control
-- Block placement and destruction
-- Multiplayer support (basic)
+- ✅ 3D block-based world rendering with textures
+- ✅ Player movement with gravity and jumping
+- ✅ Block placement and destruction
+- ✅ Procedural terrain generation
+- ✅ Particle effects
+- ✅ Physics system
+- ✅ First-person camera with smooth mouse control
+- ✅ HUD with stats and crosshair
+- ✅ Day/night cycle
+- ✅ Optimized chunk rendering
 
 ## Prerequisites
 - Java 16 or higher
 - Maven 3.6+
 
-## Setup
+## Installation & Running
 
 ```bash
 # Clone the repository
@@ -26,36 +32,66 @@ mvn clean package
 mvn exec:java@run
 ```
 
-## Project Structure
-```
-src/
-├── main/
-│   ├── java/
-│   │   └── com/minecraftclient/
-│   │       ├── Client.java          # Main entry point
-│   │       ├── world/
-│   │       │   ├── World.java
-│   │       │   ├── Chunk.java
-│   │       │   └── Block.java
-│   │       ├── render/
-│   │       │   ├── Renderer.java
-│   │       │   └── Camera.java
-│   │       ├── input/
-│   │       │   └── InputHandler.java
-│   │       └── network/
-│   │           └── NetworkManager.java
-│   └── resources/
-│       └── shaders/
-├── pom.xml
-└── README.md
-```
-
 ## Controls
 - **W/A/S/D** - Move forward/left/backward/right
+- **Mouse** - Look around
 - **Space** - Jump
+- **Left Shift** - Move down / Sprint (hold)
 - **Left Click** - Break block
 - **Right Click** - Place block
+- **F3** - Toggle debug info
+- **F5** - Toggle particle effects
 - **ESC** - Exit
+
+## Project Structure
+```
+src/main/java/com/minecraftclient/
+├── Client.java                 # Main entry point & game loop
+├── render/
+│   ├── Renderer.java          # Core rendering engine
+│   ├── Camera.java            # First-person camera
+│   ├── TextureManager.java    # Texture loading & management
+│   └── Shader.java            # OpenGL shader handling
+├── world/
+│   ├── World.java             # World management
+│   ├── Chunk.java             # 16x256x16 chunks
+│   ├── Block.java             # Block types & properties
+│   └── TerrainGenerator.java  # Procedural generation
+├── input/
+│   └── InputHandler.java      # Keyboard & mouse input
+├── physics/
+│   └── PhysicsEngine.java     # Gravity, collisions, movement
+├── particles/
+│   └── ParticleSystem.java    # Particle effects
+└── ui/
+    └── HUD.java               # On-screen display
+```
+
+## Key Components
+
+### Rendering
+- OpenGL 3.2+ with core profile
+- Frustum culling for performance
+- Batch rendering for blocks
+- Texture atlas support
+
+### Physics
+- Gravity and velocity system
+- Collision detection
+- Jump mechanics
+- Movement acceleration
+
+### World Generation
+- Perlin noise-based terrain
+- Multiple biome support
+- Tree generation
+- Ore distribution
+
+## Performance
+- Render distance: 10 chunks
+- Optimized chunk mesh generation
+- GPU instancing for blocks
+- Efficient culling system
 
 ## License
 MIT

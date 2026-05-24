@@ -15,13 +15,26 @@ dependency-reduced-pom.xml
 *.swo
 *~
 .DS_Store
+*.iml
+.classpath
+.project
+.settings/
 
 # Build
 *.class
 *.jar
 *.log
+*.jar.sha1
 
 # Runtime
-.classpath
-.project
-.settings/
+.cache/
+debug.log
+*.hprof
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Game data
+save/
+screenshots/
